@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Ventas">
+  <grid id="27dc6" binding="Ventas" layout-manager="GridLayoutManager" row-count="7" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="727" height="281"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="f19d7" class="javax.swing.JLabel" binding="tituloVentas">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Ventas"/>
+        </properties>
+      </component>
+      <component id="dc919" class="javax.swing.JLabel" binding="tituloCliente">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Cliente"/>
+        </properties>
+      </component>
+      <component id="ee141" class="javax.swing.JLabel" binding="tituloVendedor">
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Vendedor"/>
+        </properties>
+      </component>
+      <component id="75fd4" class="javax.swing.JLabel" binding="tituloCarro">
+        <constraints>
+          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Carro"/>
+        </properties>
+      </component>
+      <component id="340fe" class="javax.swing.JLabel" binding="tituloFormaDePago">
+        <constraints>
+          <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Forma de pago"/>
+        </properties>
+      </component>
+      <component id="2f470" class="javax.swing.JTextField" binding="inputAddCliente">
+        <constraints>
+          <grid row="2" column="1" row-span="2" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="(cc)"/>
+        </properties>
+      </component>
+      <component id="95d60" class="javax.swing.JLabel" binding="tituloNuevaVenta">
+        <constraints>
+          <grid row="2" column="0" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Nueva venta:"/>
+        </properties>
+      </component>
+      <component id="3fd2" class="javax.swing.JTextField" binding="inputAddVendedor">
+        <constraints>
+          <grid row="2" column="2" row-span="2" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="(cc)"/>
+        </properties>
+      </component>
+      <component id="b4a5e" class="javax.swing.JTextField" binding="inputAddCarroMarca">
+        <constraints>
+          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="(marca)"/>
+        </properties>
+      </component>
+      <component id="92208" class="javax.swing.JTextField" binding="inputAddFormaDePAgo">
+        <constraints>
+          <grid row="2" column="4" row-span="2" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="43f32" class="javax.swing.JLabel" binding="tituloBuscarVenta">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Buscar Venta"/>
+        </properties>
+      </component>
+      <component id="8f94f" class="javax.swing.JTextField" binding="inputBuscarCodigoVenta">
+        <constraints>
+          <grid row="5" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="(codigo)"/>
+        </properties>
+      </component>
+      <component id="d1078" class="javax.swing.JTextField" binding="inputAddCarroModelo">
+        <constraints>
+          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="(modelo)"/>
+        </properties>
+      </component>
+      <component id="34555" class="javax.swing.JButton" binding="botonCrearVenta">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Crear"/>
+        </properties>
+      </component>
+      <component id="ad9d6" class="javax.swing.JButton" binding="botonBuscarVenta">
+        <constraints>
+          <grid row="6" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Buscar"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
