@@ -1,6 +1,9 @@
 package proyecto;
 
-import java.io.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Arrays;
 
 public class Cliente extends Persona implements Serializable {
@@ -18,7 +21,7 @@ public class Cliente extends Persona implements Serializable {
     }
 
     public int getCantVentas() {
-        if (comprasRealizadas==null){
+        if (comprasRealizadas == null) {
             return 0;
         }
         return comprasRealizadas.length;
@@ -29,41 +32,40 @@ public class Cliente extends Persona implements Serializable {
         FileOutputStream fileOut = null;
         ObjectOutputStream out = null;
 
-        try{
+        try {
 
-            if (comprasRealizadas==null){
-                comprasRealizadas=new Venta[1];
-                comprasRealizadas[0]=venta;
-                fileOut = new FileOutputStream("venta"+".txt");
+            if (comprasRealizadas == null) {
+                comprasRealizadas = new Venta[1];
+                comprasRealizadas[0] = venta;
+                fileOut = new FileOutputStream("venta" + ".txt", true);
                 out = new ObjectOutputStream(fileOut);
                 out.writeObject(comprasRealizadas[0]);
-            }else{
+            } else {
                 this.comprasRealizadas = Arrays.copyOf(this.comprasRealizadas, this.comprasRealizadas.length + 1);
                 comprasRealizadas[comprasRealizadas.length - 1] = venta;
 
             }
 
-        }catch(IOException e){
+        } catch (IOException e) {
             throw new IOException();
 
-        }
-        finally {
-            try{
-                if(fileOut != null){
+        } finally {
+            try {
+                if (fileOut != null) {
                     fileOut.close();
-
                 }
 
+                if (out != null) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.getMessage();
             }
-            catch(IOException e){
 
-            }
         }
-
 
 
     }
-
 
 
     public void delVenta(String code) {

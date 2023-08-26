@@ -3,10 +3,7 @@ package proyecto;
 import javax.swing.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.Arrays;
 
@@ -66,14 +63,14 @@ public abstract class Almacen {
             if (clientes == null) {
                 clientes = new Cliente[1];
                 clientes[0] = new Cliente(nombre, cedula, tel);
-                fileOut = new FileOutputStream("cliente" + ".txt");
+                fileOut = new FileOutputStream("cliente" + ".txt", true);
                 out = new ObjectOutputStream(fileOut);
                 out.writeObject(clientes[0]);
             } else {
                 clientes = Arrays.copyOf(clientes, clientes.length + 1);
                 clientes[clientes.length - 1] = new Cliente(nombre, cedula, tel);
                 System.out.println(clientes[clientes.length - 1]);
-                fileOut = new FileOutputStream("cliente" + ".txt");
+                fileOut = new FileOutputStream("cliente" + ".txt", true);
                 out = new ObjectOutputStream(fileOut);
                 out.writeObject(clientes[clientes.length - 1]);
             }
@@ -101,14 +98,13 @@ public abstract class Almacen {
             if (empleados == null) {
                 empleados = new Empleado[1];
                 if (isVendedor) {
-
                     empleados[0] = new Vendedor(nombre, cedula, tel, salario);
-                    fileOut = new FileOutputStream("vendedor" + ".txt");
+                    fileOut = new FileOutputStream("vendedor" + ".txt", true);
                     out = new ObjectOutputStream(fileOut);
                     out.writeObject(empleados[0]);
                 } else {
                     empleados[0] = new Empleado(nombre, cedula, tel, salario);
-                    fileOut = new FileOutputStream("empleado" + ".txt");
+                    fileOut = new FileOutputStream("empleado" + ".txt", true);
                     out = new ObjectOutputStream(fileOut);
                     out.writeObject(empleados[0]);
                 }
@@ -117,12 +113,12 @@ public abstract class Almacen {
                 if (isVendedor) {
                     empleados[empleados.length - 1] = new Vendedor(nombre, cedula, tel, salario);
 
-                    fileOut = new FileOutputStream("vendedor" + ".txt");
+                    fileOut = new FileOutputStream("vendedor" + ".txt", true);
                     out = new ObjectOutputStream(fileOut);
                     out.writeObject(empleados[empleados.length - 1]);
                 } else {
                     empleados[empleados.length - 1] = new Empleado(nombre, cedula, tel, salario);
-                    fileOut = new FileOutputStream("empleado" + ".txt");
+                    fileOut = new FileOutputStream("empleado" + ".txt", true);
                     out = new ObjectOutputStream(fileOut);
                     out.writeObject(empleados[empleados.length - 1]);
                 }
@@ -180,55 +176,46 @@ public abstract class Almacen {
     }
 
     public static void addCarro(String marca, String modelo, String serial, Cilindraje tipo, boolean disponible, boolean estado, String tipoCarro) {//Ver cómo involucrar al proveedor
-        FileOutputStream fileOut = null;
-        ObjectOutputStream out = null;
-        try {
-            switch (tipoCarro.toLowerCase()) {
-                case "campero":
-                    Campero campero = new Campero(marca, modelo, serial, tipo, disponible, estado);
-                    if (carros == null) {
-                        carros = new Carro[1];
-                        carros[0] = campero;
-                        System.out.println(campero.getClass().getSimpleName());
-                    } else {
-                        carros = Arrays.copyOf(carros, carros.length + 1);
-                        carros[carros.length - 1] = campero;
-                        System.out.println(campero.getClass().getSimpleName());
-                    }
-                    break;
-                case "deportivo":
-                    Deportivo deportivo = new Deportivo(marca, modelo, serial, tipo, disponible, estado);
-                    if (carros == null) {
-                        carros = new Carro[1];
-                        carros[0] = deportivo;
-                        System.out.println(deportivo.getClass().getSimpleName());
-                    } else {
-                        carros = Arrays.copyOf(carros, carros.length + 1);
-                        carros[carros.length - 1] = deportivo;
-                        System.out.println(deportivo.getClass().getSimpleName());
-                    }
-                    break;
-                case "automovil":
-                    Automovil automovil = new Automovil(marca, modelo, serial, tipo, disponible, estado);
-                    if (carros == null) {
-                        carros = new Carro[1];
-                        carros[0] = automovil;
-                        System.out.println(automovil.getClass().getSimpleName());
-                    } else {
-                        carros = Arrays.copyOf(carros, carros.length + 1);
-                        carros[carros.length - 1] = automovil;
-                        System.out.println(automovil.getClass().getSimpleName());
-                    }
-                    break;
-            }
-            fileOut = new FileOutputStream("carro.txt");
-            out = new ObjectOutputStream(fileOut);
-            out.writeObject(carros[carros.length - 1]);
-            fileOut.close();
-            out.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        switch (tipoCarro.toLowerCase()) {
+            case "campero":
+                Campero campero = new Campero(marca, modelo, serial, tipo, disponible, estado);
+                if (carros == null) {
+                    carros = new Carro[1];
+                    carros[0] = campero;
+                    System.out.println(campero.getClass().getSimpleName());
+                } else {
+                    carros = Arrays.copyOf(carros, carros.length + 1);
+                    carros[carros.length - 1] = campero;
+                    System.out.println(campero.getClass().getSimpleName());
+                }
+                break;
+            case "deportivo":
+                Deportivo deportivo = new Deportivo(marca, modelo, serial, tipo, disponible, estado);
+                if (carros == null) {
+                    carros = new Carro[1];
+                    carros[0] = deportivo;
+                    System.out.println(deportivo.getClass().getSimpleName());
+                } else {
+                    carros = Arrays.copyOf(carros, carros.length + 1);
+                    carros[carros.length - 1] = deportivo;
+                    System.out.println(deportivo.getClass().getSimpleName());
+                }
+                break;
+            case "automovil":
+                Automovil automovil = new Automovil(marca, modelo, serial, tipo, disponible, estado);
+                if (carros == null) {
+                    carros = new Carro[1];
+                    carros[0] = automovil;
+                    System.out.println(automovil.getClass().getSimpleName());
+                } else {
+                    carros = Arrays.copyOf(carros, carros.length + 1);
+                    carros[carros.length - 1] = automovil;
+                    System.out.println(automovil.getClass().getSimpleName());
+                }
+                break;
         }
+
     }
 
 

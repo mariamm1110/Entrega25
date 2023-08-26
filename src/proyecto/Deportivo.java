@@ -3,7 +3,6 @@ package proyecto;
 import java.io.Serializable;
 
 public class Deportivo extends Carro implements Serializable {
-    private static final long serialVersionUID = 6529685098267757690L;
     private final Cilindraje cilindraje;
     private double precio = 100000;
 

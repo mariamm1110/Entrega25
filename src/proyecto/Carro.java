@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Carro implements Serializable {
-    private static final long serialVersionUID = 6529685098267757690L;
     protected static int cant = 0;
     protected String marca, modelo, serial, placa;
     protected boolean estado, disponible;

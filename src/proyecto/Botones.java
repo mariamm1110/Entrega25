@@ -3,7 +3,9 @@ package proyecto;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public abstract class Botones {//¿Puede ser interfaz?
 
@@ -17,8 +19,8 @@ public abstract class Botones {//¿Puede ser interfaz?
                     JOptionPane.showMessageDialog(null,
                             "Marca: " + Almacen.getCarros()[index].getMarca() +
                                     "\nModelo: " + Almacen.getCarros()[index].getModelo() +
-                                    "\nPrecio: $" + Almacen.getCarros()[index].getPrecio()+
-                            "\nTipo: "+tipoCarro,
+                                    "\nPrecio: $" + Almacen.getCarros()[index].getPrecio() +
+                                    "\nTipo: " + tipoCarro,
                             tipoCarro, JOptionPane.INFORMATION_MESSAGE);
                     inputBuscarMarca.setText("Marca");
                     inputBuscarSerial.setText("Serial");
@@ -37,7 +39,7 @@ public abstract class Botones {//¿Puede ser interfaz?
     public static void enviarCrear(JButton b, JComboBox inputAddCilindraje, JTextField inputAddMarca, JTextField inputAddSerial, JTextField inputAddModelo, String tipoCarro) {
         b.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)  {
+            public void actionPerformed(ActionEvent e) {
                 String textoCilindraje = inputAddCilindraje.getSelectedItem().toString();
                 Cilindraje cilindraje = textoCilindraje.equalsIgnoreCase("alto") ? Cilindraje.ALTO :
                         (textoCilindraje.equalsIgnoreCase("medio")) ? Cilindraje.MEDIO : Cilindraje.BAJO;
@@ -55,14 +57,22 @@ public abstract class Botones {//¿Puede ser interfaz?
                         (!Almacen.soloLetras(serial) && !serial.equalsIgnoreCase("Serial"))
                         && (!Almacen.soloLetras(modelo) && !modelo.equalsIgnoreCase("Modelo"))
                         && !cilindraje.toString().equalsIgnoreCase("Cilindraje")) {
-                    Almacen.addCarro(inputAddMarca.getText(), inputAddModelo.getText(), inputAddSerial.getText(), cilindraje, true, true, tipoCarro);
-                    JOptionPane.showMessageDialog(null, tipoCarro + " creado correctamente.",
-                            tipoCarro, JOptionPane.INFORMATION_MESSAGE);
-                    inputAddMarca.setText("Marca");
-                    inputAddSerial.setText("Serial");
-                    inputAddModelo.setText("Modelo");
-                    inputAddCilindraje.setSelectedItem("Cilindraje");
-
+                    try {
+                        Almacen.addCarro(inputAddMarca.getText(), inputAddModelo.getText(), inputAddSerial.getText(), cilindraje, true, true, tipoCarro);
+                        JOptionPane.showMessageDialog(null, tipoCarro + " creado correctamente.",
+                                tipoCarro, JOptionPane.INFORMATION_MESSAGE);
+                        inputAddMarca.setText("Marca");
+                        inputAddSerial.setText("Serial");
+                        inputAddModelo.setText("Modelo");
+                        inputAddCilindraje.setSelectedItem("Cilindraje");
+                        FileOutputStream fileOut = new FileOutputStream("carro.txt", true);
+                        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                        out.writeObject(Almacen.getCarros()[Almacen.buscarCarro(inputAddMarca.getText(), inputAddSerial.getText())]);
+                        fileOut.close();
+                        out.close();
+                    } catch (IOException ms) {
+                        ms.getMessage();
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "No se ingresaron todos los datos solicitados.",
                             "Añadir Vehículo", JOptionPane.ERROR_MESSAGE);

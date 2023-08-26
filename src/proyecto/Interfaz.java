@@ -3,10 +3,8 @@ package proyecto;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
+import java.time.LocalDate;
 
 
 public class Interfaz extends JFrame {
@@ -76,14 +74,44 @@ public class Interfaz extends JFrame {
 
         //c1=Almacen.getCarros()[1];
 
-
+/*
+        Almacen.addCliente("Maria","123","123");
+        Almacen.addCarro("Re","32","C09H1",Cilindraje.ALTO,true,true, "Campero");
+        Almacen.addEmpleado("Juan","378","83",389,true);
+        Vendedor v1=new Vendedor("Juan","3432","334",1400);
+        Empleado em=Almacen.getEmpleados()[0];
+        Cliente e1=Almacen.getClientes()[0];
+        Carro c1=Almacen.getCarros()[0];
+        LocalDate de=LocalDate.now();
+        Almacen.addVenta(v1,e1,c1,de,MP.CREDITO);
+        Almacen.addCliente("Germán","1234","1234");
+        Almacen.addCarro("Ren","32","C0F9H",Cilindraje.ALTO,true,true, "Automovil");
+        Almacen.addEmpleado("Juan","378","83",389,true);
+        e1=Almacen.getClientes()[1];
+        //c1=Almacen.getCarros()[1];
+        Almacen.addVenta(v1,e1,c1,de,MP.EFECTIVO);
+        Almacen.addEmpleado("Andres","1","3333333", 5000000,false);
+        Almacen.addEmpleado("Julio","2","444444444", 2000000,true);
+        Almacen.addEmpleado("Gullermo","3","55555555", 2000000,true);
+        Almacen.addEmpleado("Mateo","4","8888888", 8000000,false);
+        Almacen.addEmpleado("Camilo","5","3331333", 4000000,false);
+        Almacen.addProveedor("Pepitos","111","3232323","Deportivos");
+        Almacen.addProveedor("Pepitos","222","3232323","Automóviles");
+        Almacen.addProveedor("Pepitos","333","3232323","Deportivos");
+        Almacen.addProveedor("Pepitos","444","3232323","Camperos");
+        Almacen.addCliente("Johnny","22","1231213");
+        Almacen.addCliente("Johnny","33","1231213");
+        Almacen.addCliente("Johnny","44","1231213");
+        Almacen.addCliente("Johnny","55","1231213");
+        Almacen.addCliente("Johnny","66","1231213");
         Almacen.addCarro("Volvo", "2023", "0", Cilindraje.MEDIO, true, true, "Deportivo");
-        Almacen.addCarro("Suzuki", "2023", "1", Cilindraje.MEDIO, true, true, "Automovil");
-        Almacen.addCarro("BMW", "2023", "2", Cilindraje.ALTO, true, true, "Deportivo");
-        Almacen.addCarro("BMW", "2023", "3", Cilindraje.ALTO, true, true, "Automovil");
-        Almacen.addCarro("BMW", "2023", "4", Cilindraje.BAJO, true, true, "Campero");
-        Almacen.addCarro("Volvo", "2023", "5", Cilindraje.MEDIO, true, true, "Campero");
-        Almacen.addCarro("BMW", "2023", "6", Cilindraje.BAJO, true, true, "Automovil");
+        Almacen.addCarro("Suzuki","2023","1",Cilindraje.MEDIO,true,true, "Automovil");
+        Almacen.addCarro("BMW","2023","2",Cilindraje.ALTO,true,true, "Deportivo");
+        Almacen.addCarro("BMW","2023","3",Cilindraje.ALTO,true,true, "Automovil");
+        Almacen.addCarro("BMW","2023","4",Cilindraje.BAJO,true,true, "Campero");
+        Almacen.addCarro("Volvo","2023","5",Cilindraje.MEDIO,true,true, "Campero");
+        Almacen.addCarro("BMW","2023","6",Cilindraje.BAJO,true,true, "Automovil");
+*/
         try {
             cargarDatos();
         } catch (IOException e) {
@@ -98,62 +126,71 @@ public class Interfaz extends JFrame {
             if (ruta.toLowerCase().contains("cliente")) {
                 FileInputStream fileIn = new FileInputStream(ruta);
                 ObjectInputStream in = new ObjectInputStream(fileIn);
-                Cliente a = (Cliente) in.readObject();
-                while (a != null) {
-                    Almacen.addCliente(a.getNombre(), a.getCedula(), a.getTel());
-                    a = (Cliente) in.readObject();
+                while (true) {
+                    try {
+                        Cliente a = (Cliente) in.readObject();
+                        Almacen.addCliente(a.getNombre(), a.getCedula(), a.getTel());
+                    } catch (EOFException e) {
+                        break;
+                    }
+                    fileIn.close();
+                    in.close();
                 }
-                fileIn.close();
-                in.close();
             } else if (ruta.toLowerCase().contains("empleado")) {
                 FileInputStream fileIn = new FileInputStream(ruta);
                 ObjectInputStream in = new ObjectInputStream(fileIn);
-                Empleado e = (Empleado) in.readObject();
-                while (e != null) {
-                    Almacen.addEmpleado(e.getNombre(), e.getCedula(), e.getTel(), e.getSalario(), false);
-                    e = (Empleado) in.readObject();
+                while (true) {
+                    try {
+                        Empleado e = (Empleado) in.readObject();
+                        Almacen.addEmpleado(e.getNombre(), e.getCedula(), e.getTel(), e.getSalario(), false);
+                    } catch (EOFException e) {
+                        break;
+                    }
                 }
                 fileIn.close();
                 in.close();
             } else if (ruta.toLowerCase().contains("proveedor")) {
                 FileInputStream fileIn = new FileInputStream(ruta);
                 ObjectInputStream in = new ObjectInputStream(fileIn);
-                Proveedor p = (Proveedor) in.readObject();
-                while (p != null) {
-                    Almacen.addProveedor(p.getNombre(), p.getNit(), p.getTel(), p.getTipoCarros());
-                    p = (Proveedor) in.readObject();
+                while (true) {
+                    try {
+                        Proveedor e = (Proveedor) in.readObject();
+                        Almacen.addProveedor(e.getNombre(), e.getCedula(), e.getTel(), e.getTipoCarros());
+                    } catch (EOFException e) {
+                        break;
+                    }
                 }
                 fileIn.close();
                 in.close();
             } else if (ruta.toLowerCase().contains("vendedor")) {
                 FileInputStream fileIn = new FileInputStream(ruta);
                 ObjectInputStream in = new ObjectInputStream(fileIn);
-                Vendedor v = (Vendedor) in.readObject();
-                while (v != null) {
-                    Almacen.addEmpleado(v.getNombre(), v.getCedula(), v.getTel(), v.getSalario(), true);
-                    v = (Vendedor) in.readObject();
+                while (true) {
+                    try {
+                        Vendedor e = (Vendedor) in.readObject();
+                        Almacen.addEmpleado(e.getNombre(), e.getCedula(), e.getTel(), e.getSalario(), true);
+                    } catch (EOFException e) {
+                        break;
+                    }
                 }
                 fileIn.close();
                 in.close();
             } else if (ruta.toLowerCase().contains("carro")) {
                 FileInputStream fileIn = new FileInputStream(ruta);
                 ObjectInputStream in = new ObjectInputStream(fileIn);
-                Carro c = (Carro) in.readObject();
-                while (c != null) {
-                    String tipoCarro = c.getClass().getSimpleName().toLowerCase();
-                    switch (tipoCarro) {
-                        case "automovil":
+                while (true) {
+                    try {
+                        Carro c = (Carro) in.readObject();
+                        String tipoCarro = c.getClass().getSimpleName().toLowerCase();
+                        if (tipoCarro.equalsIgnoreCase("automovil")) {
                             Almacen.addCarro(c.getMarca(), c.getModelo(), c.getSerial(), c.getCilindraje(), c.isDisponible(), c.isEstado(), tipoCarro);
-                            c = (Carro) in.readObject();
-                            break;
-                        case "deportivo":
+                        } else if (tipoCarro.equalsIgnoreCase("deportivo")) {
                             Almacen.addCarro(c.getMarca(), c.getModelo(), c.getSerial(), c.getCilindraje(), c.isDisponible(), c.isEstado(), tipoCarro);
-                            c = (Carro) in.readObject();
-                            break;
-                        case "campero":
+                        } else if (tipoCarro.equalsIgnoreCase("campero")) {
                             Almacen.addCarro(c.getMarca(), c.getModelo(), c.getSerial(), c.getCilindraje(), c.isDisponible(), c.isEstado(), tipoCarro);
-                            c = (Carro) in.readObject();
-                            break;
+                        }
+                    } catch (EOFException e) {
+                        break;
                     }
                 }
                 fileIn.close();
@@ -161,10 +198,13 @@ public class Interfaz extends JFrame {
             } else if (ruta.toLowerCase().contains("venta")) {
                 FileInputStream fileIn = new FileInputStream(ruta);
                 ObjectInputStream in = new ObjectInputStream(fileIn);
-                Venta b = (Venta) in.readObject();
-                while (b != null) {
-                    Almacen.addVenta(b.getVendedor(), b.getCliente(), (Carro) b.getCarro(), b.getLocalDate(), b.getMetodoP());
-                    b = (Venta) in.readObject();
+                while (true) {
+                    try {
+                        Venta b = (Venta) in.readObject();
+                        Almacen.addVenta(b.getVendedor(), b.getCliente(), (Carro) b.getCarro(), b.getLocalDate(), b.getMetodoP());
+                    } catch (EOFException e) {
+                        break;
+                    }
                 }
                 fileIn.close();
                 in.close();
