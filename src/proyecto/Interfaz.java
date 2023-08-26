@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.time.LocalDate;
 
 
 public class Interfaz extends JFrame {
@@ -65,14 +64,14 @@ public class Interfaz extends JFrame {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        Almacen.addCarro("Re", "32", "C09H1", Cilindraje.ALTO, true, true, "Campero");
+        // Almacen.addCarro("Re", "32", "C09H1", Cilindraje.ALTO, true, true, "Campero");
 
 
-        Carro c1 = Almacen.getCarros()[0];
-        LocalDate de = LocalDate.now();
+        //Carro c1 = Almacen.getCarros()[0];
+        //LocalDate de = LocalDate.now();
 
 
-        Almacen.addCarro("Ren", "32", "C0F9H", Cilindraje.ALTO, true, true, "Automovil");
+        // Almacen.addCarro("Ren", "32", "C0F9H", Cilindraje.ALTO, true, true, "Automovil");
 
 
         //c1=Almacen.getCarros()[1];
@@ -173,7 +172,7 @@ public class Interfaz extends JFrame {
         } catch (FileNotFoundException f) {
             f.printStackTrace();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
     }
 
