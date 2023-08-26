@@ -3,11 +3,10 @@ package proyecto;
 import javax.swing.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.File;
 import java.time.LocalDate;
 import java.util.Arrays;
 
@@ -59,62 +58,58 @@ public abstract class Almacen {
     public static String getDirreccion() {
         return dirreccion;
     }
-    public static void addCliente(String nombre, String cedula, String tel) throws IOException
-    {
-        FileOutputStream fileOut=null;
-        ObjectOutputStream out=null;
+
+    public static void addCliente(String nombre, String cedula, String tel) throws IOException {
+        FileOutputStream fileOut = null;
+        ObjectOutputStream out = null;
         try {
             if (clientes == null) {
                 clientes = new Cliente[1];
                 clientes[0] = new Cliente(nombre, cedula, tel);
-                fileOut = new FileOutputStream("cliente"+".txt");
+                fileOut = new FileOutputStream("cliente" + ".txt");
                 out = new ObjectOutputStream(fileOut);
                 out.writeObject(clientes[0]);
             } else {
                 clientes = Arrays.copyOf(clientes, clientes.length + 1);
                 clientes[clientes.length - 1] = new Cliente(nombre, cedula, tel);
                 System.out.println(clientes[clientes.length - 1]);
-                fileOut=new FileOutputStream("cliente"+".txt");
-                out=new ObjectOutputStream(fileOut);
-                out.writeObject(clientes[clientes.length-1]);
+                fileOut = new FileOutputStream("cliente" + ".txt");
+                out = new ObjectOutputStream(fileOut);
+                out.writeObject(clientes[clientes.length - 1]);
             }
 
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             throw new IOException();
 
-        }
-        finally {
-            try{
-                if(fileOut != null){
+        } finally {
+            try {
+                if (fileOut != null) {
                     fileOut.close();
 
                 }
-            }
-            catch(IOException e){
+            } catch (IOException e) {
             }
         }
     }
 
 
-
     public static void addEmpleado(String nombre, String cedula, String tel, double salario, boolean isVendedor)
             throws IOException {
-        FileOutputStream fileOut=null;
-        ObjectOutputStream out=null;
+        FileOutputStream fileOut = null;
+        ObjectOutputStream out = null;
         try {
             if (empleados == null) {
                 empleados = new Empleado[1];
                 if (isVendedor) {
 
                     empleados[0] = new Vendedor(nombre, cedula, tel, salario);
-                    fileOut=new FileOutputStream("vendedor"+".txt");
-                    out=new ObjectOutputStream(fileOut);
+                    fileOut = new FileOutputStream("vendedor" + ".txt");
+                    out = new ObjectOutputStream(fileOut);
                     out.writeObject(empleados[0]);
                 } else {
                     empleados[0] = new Empleado(nombre, cedula, tel, salario);
-                    fileOut=new FileOutputStream("empleado"+".txt");
-                    out=new ObjectOutputStream(fileOut);
+                    fileOut = new FileOutputStream("empleado" + ".txt");
+                    out = new ObjectOutputStream(fileOut);
                     out.writeObject(empleados[0]);
                 }
             } else {
@@ -122,31 +117,27 @@ public abstract class Almacen {
                 if (isVendedor) {
                     empleados[empleados.length - 1] = new Vendedor(nombre, cedula, tel, salario);
 
-                    fileOut=new FileOutputStream("vendedor"+".txt");
-                    out=new ObjectOutputStream(fileOut);
-                    out.writeObject(empleados[empleados.length-1]);
+                    fileOut = new FileOutputStream("vendedor" + ".txt");
+                    out = new ObjectOutputStream(fileOut);
+                    out.writeObject(empleados[empleados.length - 1]);
                 } else {
                     empleados[empleados.length - 1] = new Empleado(nombre, cedula, tel, salario);
-                    fileOut=new FileOutputStream("empleado"+".txt");
-                    out=new ObjectOutputStream(fileOut);
-                    out.writeObject(empleados[empleados.length-1]);
+                    fileOut = new FileOutputStream("empleado" + ".txt");
+                    out = new ObjectOutputStream(fileOut);
+                    out.writeObject(empleados[empleados.length - 1]);
                 }
             }
-        }
-
-        catch(IOException e){
+        } catch (IOException e) {
             throw new IOException();
 
-        }
-        finally {
-            try{
-                if(fileOut != null){
+        } finally {
+            try {
+                if (fileOut != null) {
                     fileOut.close();
 
                 }
 
-            }
-            catch(IOException e){
+            } catch (IOException e) {
 
             }
         }
@@ -154,57 +145,55 @@ public abstract class Almacen {
 
     }
 
-    public static void addProveedor(String nombre, String nit, String tel, String tipoCarro) throws IOException{
-        FileOutputStream fileOut=null;
-        ObjectOutputStream out=null;
+    public static void addProveedor(String nombre, String nit, String tel, String tipoCarro) throws IOException {
+        FileOutputStream fileOut = null;
+        ObjectOutputStream out = null;
         try {
             if (proveedores == null) {
                 proveedores = new Proveedor[1];
                 proveedores[0] = new Proveedor(nombre, nit, tel, tipoCarro);
-                fileOut = new FileOutputStream("proveedor"+".txt");
+                fileOut = new FileOutputStream("proveedor" + ".txt");
                 out = new ObjectOutputStream(fileOut);
                 out.writeObject(proveedores[0]);
 
             } else {
                 proveedores = Arrays.copyOf(proveedores, proveedores.length + 1);
                 proveedores[proveedores.length - 1] = new Proveedor(nombre, nit, tel, tipoCarro);
-                fileOut = new FileOutputStream("proveedor"+".txt");
+                fileOut = new FileOutputStream("proveedor" + ".txt");
                 out = new ObjectOutputStream(fileOut);
                 out.writeObject(proveedores[proveedores.length - 1]);
             }
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             throw new IOException();
 
-        }
-        finally {
-            try{
-                if(fileOut != null){
+        } finally {
+            try {
+                if (fileOut != null) {
                     fileOut.close();
 
                 }
 
-            }
-            catch(IOException e){
+            } catch (IOException e) {
 
             }
         }
     }
 
     public static void addCarro(String marca, String modelo, String serial, Cilindraje tipo, boolean disponible, boolean estado, String tipoCarro) {//Ver cómo involucrar al proveedor
-        FileOutputStream fileOut=null;
-        ObjectOutputStream out=null;
-        try{
+        FileOutputStream fileOut = null;
+        ObjectOutputStream out = null;
+        try {
             switch (tipoCarro.toLowerCase()) {
                 case "campero":
                     Campero campero = new Campero(marca, modelo, serial, tipo, disponible, estado);
                     if (carros == null) {
                         carros = new Carro[1];
                         carros[0] = campero;
-
+                        System.out.println(campero.getClass().getSimpleName());
                     } else {
                         carros = Arrays.copyOf(carros, carros.length + 1);
                         carros[carros.length - 1] = campero;
+                        System.out.println(campero.getClass().getSimpleName());
                     }
                     break;
                 case "deportivo":
@@ -212,9 +201,11 @@ public abstract class Almacen {
                     if (carros == null) {
                         carros = new Carro[1];
                         carros[0] = deportivo;
+                        System.out.println(deportivo.getClass().getSimpleName());
                     } else {
                         carros = Arrays.copyOf(carros, carros.length + 1);
                         carros[carros.length - 1] = deportivo;
+                        System.out.println(deportivo.getClass().getSimpleName());
                     }
                     break;
                 case "automovil":
@@ -222,33 +213,32 @@ public abstract class Almacen {
                     if (carros == null) {
                         carros = new Carro[1];
                         carros[0] = automovil;
+                        System.out.println(automovil.getClass().getSimpleName());
                     } else {
                         carros = Arrays.copyOf(carros, carros.length + 1);
                         carros[carros.length - 1] = automovil;
-                        break;
+                        System.out.println(automovil.getClass().getSimpleName());
                     }
+                    break;
             }
-            fileOut=new FileOutputStream("carro"+".txt");
-            out=new ObjectOutputStream(fileOut);
-            out.writeObject(carros[carros.length-1]);
-
-        }catch(IOException e){
-
+            fileOut = new FileOutputStream("carro.txt");
+            out = new ObjectOutputStream(fileOut);
+            out.writeObject(carros[carros.length - 1]);
+            fileOut.close();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-
-            
-
-
     }
 
+
     public static void addVenta(Vendedor vendedor, Cliente cliente, Carro carro, LocalDate fecha, MP formaDePago) throws IOException {
-        try{
+        try {
 
             cliente.registrarCompra(new Venta(vendedor, cliente, carro, fecha, formaDePago));
             carro.setDisponible(false);
 
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new IOException();
 
         }
@@ -285,7 +275,7 @@ public abstract class Almacen {
         return i;
     }
 
-    public static int buscarEmpleado(String cedula) throws ArrayIndexOutOfBoundsException {
+    public static int buscarEmpleado(String cedula) {
         int i = 0;
         if (empleados == null) {//Si es null envía -1 para indicar que no existe
             return -1;
@@ -301,99 +291,83 @@ public abstract class Almacen {
     }
 
     public static int buscarCarro(String marca, String serial) { //Buscar por marca y modelo y que muestre las cilindradas;
-        int i = 0;
-        if (carros == null) {//Si es null envía -1 para indicar que no existe
-            return -1;
-        } else {
-            while ((i < carros.length) && !(serial.equals(carros[i].getSerial()) && marca.equalsIgnoreCase(carros[i].getMarca()))) {
-                i++;
+        try {
+            int i = 0;
+            if (carros == null) {//Si es null envía -1 para indicar que no existe
+                return -1;
+            } else {
+                while ((i < carros.length) && !(serial.equals(carros[i].getSerial()) && marca.equalsIgnoreCase(carros[i].getMarca()))) {
+                    i++;
+                }
+                return i;
             }
-            if (i >= carros.length) {
-                return -1;//Si i es mayor que el arreglo entonces no encontró nada y envía -1 para indicar que no existe
-            }
-            return i;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(e);
+            return -1;//Envía -1 si llega a arrojar esta excepción
         }
     }
 
-    public static void delCliente(String cedula) throws IOException{//ver cómo poner con personas
-        int i = 0;
-        while (!cedula.equals(clientes[i].getCedula())) {
-            i++;
-        }
-        if(i<clientes.length){
-            File fileObj=new File(clientes[i].getNombre()+clientes[i].getCedula()+"cliente.txt");
-            if(fileObj.exists()){
-                if(fileObj.delete()){
+    public static void delCliente(String cedula) throws IOException {
+        int i = buscarCliente(cedula);
+        if (i < clientes.length) {
+            File fileObj = new File(clientes[i].getNombre() + clientes[i].getCedula() + "cliente.txt");
+            if (fileObj.exists()) {
+                if (fileObj.delete()) {
                     System.arraycopy(clientes, i + 1, clientes, i, clientes.length - 1 - i);
                     clientes = Arrays.copyOf(clientes, clientes.length - 1);
-                }
-                else throw new IOException();
-            }
-            else throw new IOException();
+                } else throw new IOException();
+            } else throw new IOException();
         }
-
-
     }
 
-    public static void delEmpleado(String cedula) throws IOException{
+    public static void delEmpleado(String cedula) throws IOException {
         int i = 0;
         while (!cedula.equals(empleados[i].getCedula())) {
             i++;
         }
-        if(i<empleados.length ) {
-            if(empleados[i] instanceof Vendedor){
-                File fileObj=new File(empleados[i].getNombre()+empleados[i].getCedula()+"vendedor.txt");
-                if(fileObj.exists()){
-                    if(fileObj.delete()){
+        if (i < empleados.length) {
+            if (empleados[i] instanceof Vendedor) {
+                File fileObj = new File(empleados[i].getNombre() + empleados[i].getCedula() + "vendedor.txt");
+                if (fileObj.exists()) {
+                    if (fileObj.delete()) {
                         System.arraycopy(empleados, i + 1, empleados, i, empleados.length - 1 - i);
                         empleados = Arrays.copyOf(empleados, empleados.length - 1);
-                    }
-                    else{
+                    } else {
                         throw new IOException();
                     }
-                }
-                else throw new IOException();
-            }
-            else{
-                File fileObje=new File(empleados[i].getNombre()+empleados[i].getCedula()+"empleado.txt");
-                if(fileObje.exists()){
-                    if(fileObje.delete()){
+                } else throw new IOException();
+            } else {
+                File fileObje = new File(empleados[i].getNombre() + empleados[i].getCedula() + "empleado.txt");
+                if (fileObje.exists()) {
+                    if (fileObje.delete()) {
                         System.arraycopy(empleados, i + 1, empleados, i, empleados.length - 1 - i);
                         empleados = Arrays.copyOf(empleados, empleados.length - 1);
-                    }
-                    else{
+                    } else {
                         throw new IOException();
                     }
-                }
-                else throw new IOException();
+                } else throw new IOException();
             }
-
 
 
         }
     }
 
-    public static void delProveedor(String cedula) throws IOException{
+    public static void delProveedor(String cedula) throws IOException {
         int i = 0;
         while (!cedula.equals(proveedores[i].getCedula())) {
             i++;
         }
-        if(i<proveedores.length){
-            File fileObj=new File(proveedores[i].getNombre()+proveedores[i].getCedula()+"proveedor.txt");
-            if(fileObj.exists()){
-                if(fileObj.delete()){
+        if (i < proveedores.length) {
+            File fileObj = new File(proveedores[i].getNombre() + proveedores[i].getCedula() + "proveedor.txt");
+            if (fileObj.exists()) {
+                if (fileObj.delete()) {
                     System.arraycopy(proveedores, i + 1, proveedores, i, proveedores.length - 1 - i);
                     proveedores = Arrays.copyOf(proveedores, proveedores.length - 1);
-                }
-                else{
+                } else {
                     throw new IOException();
                 }
-            }
-            else throw new IOException();
+            } else throw new IOException();
         }
-
-
-
     }
 
     public static void delCarro(String marca, String serial) {

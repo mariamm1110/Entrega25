@@ -1,8 +1,10 @@
 package proyecto;
+import java.io.*;
 
-public class Automovil extends Carro {
+public class Automovil extends Carro implements Serializable{
+    private static final long serialVersionUID = 6529685098267757690L;
     private final Cilindraje cilindraje;
-    private double precio =20000;
+    private double precio = 20000;
 
     public Automovil(String marca, String modelo, String serial, Cilindraje cilindraje, boolean estado, boolean disponible) {
         super(marca, modelo, serial, cilindraje, estado, disponible);
@@ -18,7 +20,7 @@ public class Automovil extends Carro {
     }
 
     public void setPrecio(String precio) {
-        this.precio=Integer.valueOf(precio);
+        this.precio = Integer.valueOf(precio);
     }
 
 }

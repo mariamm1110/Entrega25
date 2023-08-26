@@ -1,15 +1,15 @@
-package proyecto;
+package proyecto;//Crear los ficheros con cada tipo de carro.
 
+import java.io.Serializable;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Carro {
-
-    protected static int cant = 0;//Qué vamos a usar aquí?
+public class Carro implements Serializable {
+    private static final long serialVersionUID = 6529685098267757690L;
+    protected static int cant = 0;
     protected String marca, modelo, serial, placa;
     protected boolean estado, disponible;
-
     protected double precio = 0;
-    // protected Cilindraje cilindraje;
+    protected Cilindraje cilindraje;
 
     public Carro(String marca, String modelo, String serial, Cilindraje tipo, boolean estado, boolean disponible) {
         super();
@@ -19,6 +19,7 @@ public class Carro {
         this.estado = estado;
         this.disponible = disponible;
         this.serial = serial;
+        this.cilindraje = tipo;
         placa = "";
     }
 
@@ -40,6 +41,10 @@ public class Carro {
 
     public String getPlaca() {
         return placa;
+    }
+
+    public Cilindraje getCilindraje() {
+        return cilindraje;
     }
 
     public double getPrecio() {
@@ -64,7 +69,7 @@ public class Carro {
 
     public void setPlaca() {
         String banco = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        this.placa="";
+        this.placa = "";
         // La cadena en donde iremos agregando un carácter aleatorio
         for (int x = 0; x < 6; x++) {
             int indiceAleatorio = ThreadLocalRandom.current().nextInt(0, banco.length() - 1);

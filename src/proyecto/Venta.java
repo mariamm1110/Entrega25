@@ -1,5 +1,6 @@
 package proyecto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -17,7 +18,7 @@ class Eventas extends Exception {
     }
 }
 
-public class Venta {
+public class Venta implements Serializable {
 
     private String codigo;
     private Vendedor vendedor;
@@ -25,7 +26,7 @@ public class Venta {
     private final Carro carro;
     private LocalDate fecha;
 
-    private static int code=0;
+    private static int code = 0;
 
 
     private MP metodoP = MP.CREDITO;
@@ -38,7 +39,7 @@ public class Venta {
         this.carro = carro;
         this.fecha = fecha;
         this.metodoP = metodoP;
-        this.codigo="V"+code;
+        this.codigo = "V" + code;
         code++;
     }
 //hola
@@ -82,19 +83,22 @@ public class Venta {
         return metodoP;
     }
 
+    public Carro getCarro() {
+        return carro;
+    }
 
     public void setMetodoP(MP metodoP) {
         this.metodoP = metodoP;
     }
 
 
-    public double calcularVenta(){
+    public double calcularVenta() {
 
         double precio = carro.getPrecio();
-        int x=Almacen.buscarEmpleado(cliente.getCedula());
+        int x = Almacen.buscarEmpleado(cliente.getCedula());
 
-        if (x!=-1){
-            precio*=0.9;
+        if (x != -1) {
+            precio *= 0.9;
         }
 
 

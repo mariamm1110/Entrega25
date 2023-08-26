@@ -1,6 +1,9 @@
 package proyecto;
 
-public class Campero extends Carro {
+import java.io.Serializable;
+
+public class Campero extends Carro implements Serializable {
+    private static final long serialVersionUID = 6529685098267757690L;
     private final Cilindraje cilindraje;
     private double precio = 50000;
 

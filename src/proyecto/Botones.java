@@ -44,7 +44,7 @@ public abstract class Botones {//¿Puede ser interfaz?
                 String marca = inputAddMarca.getText();
                 String modelo = inputAddSerial.getText();
                 String serial = inputAddModelo.getText();
-                if (Almacen.buscarCarro(marca, serial) != -1) { //Si al buscar no obtiene -1 significa que existe y no agrega nada.
+                if (Almacen.buscarCarro(marca, serial) == -1) { //Si al buscar no obtiene -1 significa que existe y no agrega nada.
                     JOptionPane.showMessageDialog(null, "Ya existe un " + tipoCarro.toLowerCase() + " de la marca " + marca + " ingresado con el serial indicado.", "Añadir Vehículo", JOptionPane.ERROR_MESSAGE);
                     inputAddMarca.setText("Marca");
                     inputAddSerial.setText("Serial");

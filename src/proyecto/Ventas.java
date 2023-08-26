@@ -99,7 +99,9 @@ public class Ventas extends JFrame {
                             JOptionPane.showMessageDialog(null,
                                     "La cédula ingresada no coincide con ningún vendedor registrado.",
                                     "Añadir venta", JOptionPane.ERROR_MESSAGE);
+                            c.printStackTrace();
                         }catch (IOException z){
+
                             z.printStackTrace();
                         }
 
